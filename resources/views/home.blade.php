@@ -727,9 +727,9 @@
                         </li>
                     </ul>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('search') }}" class="nav-icon text-dark me-3"><i class="fas fa-search"></i></a>
-                        <a href="{{ route('account') }}" class="nav-icon text-dark me-3"><i class="fas fa-user"></i></a>
-                        <a href="{{ route('cart') }}" class="nav-icon text-dark position-relative">
+                        @include('components.search')
+                        <a href="{{ route('account') }}" class="nav-icon text-dark ms-3"><i class="fas fa-user"></i></a>
+                        <a href="{{ route('cart') }}" class="nav-icon text-dark position-relative ms-3">
                             <i class="fas fa-shopping-cart"></i>
                             @if(session()->has('cart') && count(session('cart')) > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
