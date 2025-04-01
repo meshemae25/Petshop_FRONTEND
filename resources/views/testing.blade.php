@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+    <title>PawShop - Everything Your Pet Needs</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Main Stylesheet for PawShop */
@@ -221,6 +220,231 @@
             margin-top: 1rem;
             color: var(--text-color);
         }
+
+        /* Product Cards */
+        .product-section {
+            background-color: var(--gray-100);
+            padding: 4rem 0;
+            border-radius: 30px;
+        }
+
+        .product-card {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: none;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .product-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .product-card .card-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .price {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-right: 8px;
+        }
+
+        .product-card .btn-primary {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .product-card .btn-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-100);
+            color: var(--primary-color);
+            border: none;
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+
+        .product-card .btn-icon:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--white);
+            border-radius: 50%;
+            box-shadow: var(--box-shadow);
+            opacity: 1;
+            margin-right: -25px;
+        }
+
+        .carousel-control-next-icon {
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+        }
+
+        /* Partners Section */
+        .partners-section {
+            padding: 4rem 0;
+        }
+
+        .partner-logo {
+            max-height: 60px;
+            filter: opacity(0.7);
+            transition: var(--transition);
+        }
+
+        .partner-logo:hover {
+            filter: opacity(1);
+            transform: scale(1.05);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 5rem 0;
+            position: relative;
+            border-radius: 30px;
+            margin: 4rem 0;
+        }
+
+        .testimonial-img-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 5px solid var(--white);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .testimonial-img-container:hover {
+            transform: scale(1.05) rotate(2deg);
+            border-radius: 30px;
+        }
+
+        .testimonial-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-card {
+            border-radius: 15px;
+            padding: 1.5rem;
+            background-color: var(--white);
+            height: 100%;
+            transition: var(--transition);
+            box-shadow: var(--box-shadow);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .testimonial-text:before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            left: -10px;
+            top: -20px;
+            color: rgba(0, 153, 255, 0.1);
+            font-family: serif;
+        }
+
+        .testimonial-card .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .testimonial-card .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-card .customer-info {
+            flex: 1;
+        }
+
+        .testimonial-card .customer-name {
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .testimonial-card .customer-type {
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        .rating {
+            font-weight: 600;
+        }
+
+        .rating i {
+            color: var(--accent-color);
+        }
+
         /* Footer */
         .footer {
             background-color: var(--primary-color);
@@ -477,8 +701,8 @@
     </style>
 </head>
 <body>
-                <!-- Header/Navigation -->
-                <header>
+    <!-- Header/Navigation -->
+    <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
@@ -505,7 +729,6 @@
         </div>
         <div class="d-flex align-items-center">
             @include('components.search')
-            <a href="{{ route('favorites') }}" class="nav-icon text-dark ms-3"><i class="fas fa-heart"></i></a>
             <a href="{{ route('account') }}" class="nav-icon text-dark ms-3"><i class="fas fa-user"></i></a>
             <a href="{{ route('cart') }}" class="nav-icon text-dark position-relative ms-3">
                 <i class="fas fa-shopping-cart"></i>
@@ -518,153 +741,3 @@
         </div>
     </div>
 </nav>
-
-@extends('layouts.app')
-
-@section('content')
-<div class="container my-5">
-    <h1 class="mb-4">Your Cart</h1>
-
-    @if(session()->has('cart') && count(session('cart')) > 0)
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="table-responsive">
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(session('cart') as $id => $item)
-                            <tr class="border-top">
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}" height="80" class="me-3">
-                                        <div>
-                                            <h6 class="mb-0">{{ $item['name'] }}</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>{{ $item['size'] ?? '2 kg' }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateCartItem({{ $id }}, -1)">-</button>
-                                        <span class="mx-2">{{ $item['quantity'] }}</span>
-                                        <button class="btn btn-sm btn-outline-secondary" onclick="updateCartItem({{ $id }}, 1)">+</button>
-                                    </div>
-                                </td>
-                                <td>₱ {{ number_format($item['price'] * $item['quantity'], 2) }}</td>
-                            </tr>
-                            <tr class="border-bottom">
-                                <td colspan="4">
-                                    <div class="d-flex gap-3 my-2">
-                                        <a href="{{ route('cart.edit', $id) }}" class="text-decoration-none text-secondary">Edit</a>
-                                        <a href="{{ route('cart.remove', $id) }}" class="text-decoration-none text-secondary">Remove</a>
-                                        <a href="{{ route('wishlist.add', $id) }}" class="text-decoration-none text-primary">Move to wishlist</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                    <div>
-                        <p class="mb-0">{{ count(session('cart')) }} item(s)</p>
-                        <p class="text-primary mb-0">₱ {{ number_format(session('cart_total', 0), 2) }}</p>
-                    </div>
-                    <a href="{{ route('shop') }}" class="btn btn-link text-decoration-none">
-                        <i class="fas fa-arrow-left me-2"></i> Continue Shopping
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-4 mt-4 mt-lg-0">
-                <div class="card border-0 shadow-sm rounded-3">
-                    <div class="card-body p-4">
-                        <h5 class="card-title mb-4">Order Summary</h5>
-                        
-                        <div class="mb-3">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Promo code" aria-label="Promo code">
-                                <button class="btn btn-dark" type="button">Submit</button>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Shipping Cost</span>
-                            <span>TBD</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Discount</span>
-                            <span>-₱{{ number_format(session('discount', 0), 2) }}</span>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>Tax</span>
-                            <span>TBD</span>
-                        </div>
-
-                        <hr>
-
-                        <div class="d-flex justify-content-between mb-3">
-                            <h5>Estimated Total:</h5>
-                            <h5>₱ {{ number_format(session('cart_total', 0), 2) }}</h5>
-                        </div>
-
-                        <div class="text-center mb-3">
-                            <small class="text-muted">or 4 interest-free payments of ₱{{ number_format(session('cart_total', 0) / 4, 2) }} with <span class="text-primary fw-bold">Paypal</span></small>
-                        </div>
-
-                        @if(session('cart_total', 0) < 1000)
-                            <div class="text-center mb-3">
-                                <small class="text-danger">You're ₱{{ number_format(1000 - session('cart_total', 0), 2) }} away from free shipping!</small>
-                            </div>
-                        @else
-                            <div class="text-center mb-3">
-                                <small class="text-success">You qualify for free shipping!</small>
-                            </div>
-                        @endif
-
-                        <a href="{{ route('checkout') }}" class="btn btn-primary w-100 py-2">Checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @else
-        <div class="text-center py-5">
-            <i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i>
-            <h3>Your cart is empty</h3>
-            <p class="text-muted">Looks like you haven't added any products to your cart yet.</p>
-            <a href="{{ route('shop') }}" class="btn btn-primary mt-3">
-                Continue Shopping
-            </a>
-        </div>
-    @endif
-</div>
-@endsection
-
-@section('scripts')
-<script>
-    function updateCartItem(id, change) {
-        fetch(`/cart/update/${id}/${change}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.reload();
-            }
-        });
-    }
-</script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-@endsection

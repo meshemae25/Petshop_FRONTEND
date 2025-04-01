@@ -701,47 +701,47 @@
     </style>
 </head>
 <body>
-    <!-- Header/Navigation -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-            <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('images/pawshop-logo.png') }}" alt="PawShop Logo" height="40">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact Us</a>
-                        </li>
-                    </ul>
-                    <div class="d-flex align-items-center">
-                        @include('components.search')
-                        <a href="{{ route('account') }}" class="nav-icon text-dark ms-3"><i class="fas fa-user"></i></a>
-                        <a href="{{ route('cart') }}" class="nav-icon text-dark position-relative ms-3">
-                            <i class="fas fa-shopping-cart"></i>
-                            @if(session()->has('cart') && count(session('cart')) > 0)
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                                    {{ count(session('cart')) }}
-                                </span>
-                            @endif
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
+        <!-- Header/Navigation -->
+        <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ asset('images/pawshop-logo.png') }}" alt="PawShop Logo" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center">
+            @include('components.search')
+            <a href="{{ route('favorites') }}" class="nav-icon text-dark ms-3"><i class="fas fa-heart"></i></a>
+            <a href="{{ route('account') }}" class="nav-icon text-dark ms-3"><i class="fas fa-user"></i></a>
+            <a href="{{ route('cart') }}" class="nav-icon text-dark position-relative ms-3">
+                <i class="fas fa-shopping-cart"></i>
+                @if(session()->has('cart') && count(session('cart')) > 0)
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                        {{ count(session('cart')) }}
+                    </span>
+                @endif
+            </a>
+        </div>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section class="hero-section" style="background-image: url('{{ asset('images/hero-background.jpg') }}'); background-size: cover; background-position: center;">
@@ -909,7 +909,7 @@
                                                 <a href="{{ route('cart.add', 1) }}" class="btn btn-primary">Add to Cart</a>
                                                 <button class="btn btn-icon ms-2" 
                                                         onclick="event.preventDefault(); document.getElementById('wishlist-form-1').submit();">
-                                                    <i class="fas fa-heart"></i>
+                                                    <i class="fas fa-heart" style="color: red;"></i>
                                                 </button>
                                                 <form id="wishlist-form-1" action="{{ route('wishlist.toggle', 1) }}" method="POST" style="display: none;">
                                                     @csrf
@@ -945,7 +945,7 @@
                                                 <a href="{{ route('cart.add', 2) }}" class="btn btn-primary">Add to Cart</a>
                                                 <button class="btn btn-icon ms-2" 
                                                         onclick="event.preventDefault(); document.getElementById('wishlist-form-2').submit();">
-                                                    <i class="fas fa-heart"></i>
+                                                    <i class="fas fa-heart" style="color: red;"></i>
                                                 </button>
                                                 <form id="wishlist-form-2" action="{{ route('wishlist.toggle', 2) }}" method="POST" style="display: none;">
                                                     @csrf
@@ -980,7 +980,7 @@
                                                 <a href="{{ route('cart.add', 3) }}" class="btn btn-primary">Add to Cart</a>
                                                 <button class="btn btn-icon ms-2" 
                                                         onclick="event.preventDefault(); document.getElementById('wishlist-form-3').submit();">
-                                                    <i class="fas fa-heart"></i>
+                                                    <i class="fas fa-heart" style="color: red;"></i>
                                                 </button>
                                                 <form id="wishlist-form-3" action="{{ route('wishlist.toggle', 3) }}" method="POST" style="display: none;">
                                                     @csrf
@@ -1141,10 +1141,11 @@
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <div class="footer-widget">
-                        <h4>Categories</h4>
+                        <h4>Costumer Services</h4>
                         <ul class="list-unstyled footer-links">
-                            <li><a href="{{ route('category', 'dogs') }}">Dogs</a></li>
-                            <li><a href="{{ route('category', 'cats') }}">Cats</a></li>
+                            <li><a href="{{ route('category', 'dogs') }}">Shipping</a></li>
+                            <li><a href="{{ route('category', 'cats') }}">Return</a></li>
+                            <li><a href="{{ route('category', 'cats') }}">Order Tracking</a></li>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">

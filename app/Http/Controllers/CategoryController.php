@@ -10,9 +10,9 @@ class CategoryController extends Controller
     {
         // Just an example; you can fetch categories from your database.
         $categories = [
-            1 => 'Electronics',
-            2 => 'Books',
-            3 => 'Clothing'
+            1 => 'Cat',
+            2 => 'Dog',
+            3 => 'Bird',
         ];
 
         $category = $categories[$id] ?? 'Category Not Found';
