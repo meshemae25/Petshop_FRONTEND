@@ -418,7 +418,7 @@
                             <i class="fas fa-user"></i> My Profile <span class="badge-points">POINTS</span>
                         </a>
                         <a href="#" class="sidebar-link mb-2">
-                            <i class="fas fa-address-book"></i> Address Book
+                            <i class="fas fa-address-book"></i> Address
                         </a>
                         <a href="#" class="sidebar-link mb-2">
                             <i class="fas fa-credit-card"></i> My Payment Options
@@ -588,7 +588,7 @@
                     <div class="order-list mt-3">
                         <div class="order-item">
                             <div class="order-date">12/28/2024 21:03:35</div>
-                            <img src="{{ asset('images/pet-product-1.jpg') }}" alt="Order image" class="order-image">
+                            <img src="{{ asset('images/product1.png') }}" alt="Order image" class="order-image">
                             <div class="order-details">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div>1 item</div>
@@ -603,7 +603,7 @@
                         
                         <div class="order-item">
                             <div class="order-date">11/27/2024 16:18:45</div>
-                            <img src="{{ asset('images/pet-product-2.jpg') }}" alt="Order image" class="order-image">
+                            <img src="{{ asset('images/product2.png') }}" alt="Order image" class="order-image">
                             <div class="order-details">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <div>3 items</div>

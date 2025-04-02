@@ -102,3 +102,8 @@ Route::get('/', [ProductController::class, 'index'])->name('shop');
 Route::get('/favorites', [ProductController::class, 'favorites'])->name('favorites');
 Route::get('/favorites/search', [ProductController::class, 'searchFavorites'])->name('favorites.search');
 Route::get('/search', [ProductController::class, 'search'])->name('search');
+
+//product-detail
+Route::get('/product-detail', function () {
+    return view('product-detail');
+})->name('product-detail');

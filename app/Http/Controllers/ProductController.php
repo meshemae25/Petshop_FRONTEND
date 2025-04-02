@@ -41,6 +41,6 @@ class ProductController extends Controller
         // Fetch the user's favorite products (for now, just returning all products as a placeholder)
         $products = Product::paginate(12);
 
-        return view('favorites', compact('products')); // Ensure you have a 'favorites.blade.php' file
+        return view('favorites', compact('products')); 
     }
 }
