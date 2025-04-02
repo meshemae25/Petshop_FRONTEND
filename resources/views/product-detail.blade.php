@@ -532,13 +532,13 @@
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('images/products/brit-premium-salmon.jpg') }}" class="d-block w-100" alt="Brit Premium by Nature">
+                            <img src="{{ asset('images/products/cat premium food.jpg') }}" class="d-block w-100" alt="Brit Premium by Nature">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('images/products/brit-premium-chicken.jpg') }}" class="d-block w-100" alt="Brit Premium by Nature">
+                            <img src="{{ asset('images/products/brit 3.png') }}" class="d-block w-100" alt="Brit Premium by Nature">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('images/products/brit-premium-turkey.jpg') }}" class="d-block w-100" alt="Brit Premium by Nature">
+                            <img src="{{ asset('images/products/brit 4.png') }}" class="d-block w-100" alt="Brit Premium by Nature">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
@@ -560,16 +560,16 @@
             <!-- Thumbnail Images -->
             <div class="row mt-3">
                 <div class="col-3">
-                    <img src="{{ asset('images/products/brit-premium-salmon-thumb.jpg') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="0" alt="Salmon">
+                    <img src="{{ asset('images/products/brit 2.png') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="0" alt="Salmon">
                 </div>
                 <div class="col-3">
-                    <img src="{{ asset('images/products/brit-premium-chicken-thumb.jpg') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="1" alt="Chicken">
+                    <img src="{{ asset('images/products/brit 3.png') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="1" alt="Chicken">
                 </div>
                 <div class="col-3">
-                    <img src="{{ asset('images/products/brit-premium-turkey-thumb.jpg') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="2" alt="Turkey">
+                    <img src="{{ asset('images/products/brit 4.png') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="2" alt="Turkey">
                 </div>
                 <div class="col-3">
-                    <img src="{{ asset('images/products/brit-premium-lamb-thumb.jpg') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="3" alt="Lamb">
+                    <img src="{{ asset('images/products/brit 5.png') }}" class="img-thumbnail" data-bs-target="#productCarousel" data-bs-slide-to="3" alt="Lamb">
                 </div>
             </div>
             

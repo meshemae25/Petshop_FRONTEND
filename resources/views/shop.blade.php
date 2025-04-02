@@ -953,15 +953,13 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Salmon Cat Food</h5>
-                            <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
                                 <span class="price">₱540.00</span>
-                                <button class="btn btn-sm btn-primary add-to-cart" data-product-id="5">
-                                    <i class="fas fa-shopping-cart me-1"></i> Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                            <a href="{{ route('product-detail', ['id' => 5]) }}" class="btn btn-sm btn-primary">
+                            <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                    </a>
                 </div>
+            </div>
                 
                 <!-- Product Card 9 -->
                 <div class="col">

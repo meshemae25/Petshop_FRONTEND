@@ -107,3 +107,5 @@ Route::get('/search', [ProductController::class, 'search'])->name('search');
 Route::get('/product-detail', function () {
     return view('product-detail');
 })->name('product-detail');
+
+Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product-detail');

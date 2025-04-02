@@ -43,4 +43,10 @@ class ProductController extends Controller
 
         return view('favorites', compact('products')); 
     }
+
+    public function show($id)
+    {
+    $product = Product::findOrFail($id); // Fetch the product by ID
+    return view('product-detail', compact('product')); // Return the product detail view
+    }
 }
