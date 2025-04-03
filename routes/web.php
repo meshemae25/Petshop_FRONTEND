@@ -109,3 +109,30 @@ Route::get('/product-detail', function () {
 })->name('product-detail');
 
 Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product-detail');
+
+Route::get('/navbar', function () {
+    return view('navbar');
+})->name('navbar');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+});
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
+
+Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+
+Route::get('/promocodes', [PromoCodeController::class, 'index'])->name('promocodes.index');
+
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
