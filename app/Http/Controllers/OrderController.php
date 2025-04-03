@@ -8,6 +8,6 @@ class OrderController extends Controller
 {
     public function index()
     {
-        return view('orders.index'); // Ensure this view file exists
+        return view('order.index');  // Make sure this points to the right Blade file
     }
 }

@@ -5,7 +5,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LoyaltyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FavoritesController;
-
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -136,3 +137,9 @@ Route::get('/promocodes', [PromoCodeController::class, 'index'])->name('promocod
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+
+Route::get('/orders', [OrderController::class, 'index']);
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
