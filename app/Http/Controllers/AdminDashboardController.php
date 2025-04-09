@@ -11,3 +11,4 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard'); // Make sure this view exists!
     }
 }
+

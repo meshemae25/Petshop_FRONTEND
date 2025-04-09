@@ -100,56 +100,96 @@
             color: var(--white) !important;
         }
 
-        /* Hero Section */
+        /* Hero Section - Updated with blue gradient background */
         .hero-section {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-            border-radius: 0 0 30px 30px;
-            box-shadow: var(--box-shadow);
+        background: linear-gradient(135deg, #00a1ff 0%, #0077ff 100%);
+        color: var(--white);
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
+        border-radius: 0 0 30px 30px;
+        box-shadow: var(--box-shadow);
+        }
+
+        .hero-section:before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+        z-index: 0;
+        }
+
+        /* Make sure content is above the gradient */
+        .hero-section .container {
+        position: relative;
+        z-index: 2;
         }
 
         .hero-section h1 {
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
         }
 
         .hero-section .lead {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
         }
 
-        .hero-section .btn-primary {
-            background-color: var(--white);
-            color: var(--primary-color);
-            border-color: var(--white);
-            padding: 12px 25px;
-        }
+/* Updated button styles to match Image 1 */
+.hero-section .btn-primary {
+    background-color: var(--white);
+    color: var(--primary-color);
+    border-color: var(--white);
+    padding: 12px 25px;
+}
 
-        .hero-section .btn-outline-primary {
-            color: var(--white);
-            border-color: var(--white);
-            padding: 12px 25px;
-        }
+.hero-section .btn-orange {
+    background-color: #ffcc00;
+    color: var(--text-color);
+    border-color: #ffcc00;
+    padding: 12px 25px;
+    font-weight: 600;
+}
 
-        .hero-section .btn-outline-primary:hover {
-            background-color: var(--white);
-            color: var(--primary-color);
-        }
+.hero-section .btn-orange:hover {
+    background-color: #ffc000;
+    border-color: #ffc000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-        .hero-image {
-            transform: scale(1.1);
-            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
-            transition: transform 0.5s ease;
-        }
+/* Add a yellow circular background behind the puppy */
+.hero-image-container {
+    position: relative;
+    padding: 20px;
+}
 
-        .hero-image:hover {
-            transform: scale(1.15) translateY(-5px);
-        }
+.hero-image-container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    z-index: 1;
+}
 
+.hero-image {
+    position: relative;
+    z-index: 2;
+    transform: scale(1.1);
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    transition: transform 0.5s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.15) translateY(-5px);
+}
         /* Category Section */
         .category-section {
             padding: 4rem 0;
@@ -744,22 +784,25 @@
 </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section" style="background-image: url('{{ asset('images/hero-background.jpg') }}'); background-size: cover; background-position: center;">
+<section class="hero-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 fade-in-up">
-                <h1 class="display-4">{{ $hero_title ?? 'Everything Your Pet Needs, Just a Click Away!' }}</h1>
-                <p class="lead">{{ $hero_subtitle ?? 'Quality pet supplies and food, delivering nationwide with love and care' }}</p>
+                <h1 class="display-4">Everything Your Pet Needs, Just a Click Away!</h1>
+                <p class="lead">Shop premium pet food, accessories, grooming, and healthcare products online with ease!</p>
                 <div class="d-grid gap-3 d-md-flex">
-                    <a href="{{ route('shop') }}" class="btn btn-primary px-4 py-2 me-md-3">Shop Now <i class="fas fa-arrow-right ms-2"></i></a>
-                    <a href="{{ route('loyalty') }}" class="btn btn-orange px-4 py-2">Create Account</a>
+                    <a href="{{ route('shop') }}" class="btn btn-primary px-4 py-2 me-md-3">Shop Now</a>
+                    <a href="{{ route('loyalty') }}" class="btn btn-orange px-4 py-2">Create account</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center">
-                <img src="{{ asset('images/pug-puppy.png') }}" alt="Cute Puppy" class="img-fluid hero-image">
+                <div class="hero-image-container">
+                    <img src="{{ asset('images/pug-puppy.png') }}" alt="Cute Puppy" class="img-fluid hero-image">
+                </div>
             </div>
         </div>
     </div>
+</section>
     
 </section>
     <!-- Shop by Category Section -->

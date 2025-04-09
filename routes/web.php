@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\InventoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -143,3 +144,17 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
 Route::get('/orders', [OrderController::class, 'index']);
 
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+Route::patch('/orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
+
+Route::post('/orders/send-notification', [OrderController::class, 'sendNotification'])->name('orders.send-notification');
+
+Route::post('/orders/refund', [OrderController::class, 'refund'])->name('orders.refund');
+
+Route::get('/inventory', [InventoryController::class, 'index']);
+Route::post('/inventory/update', [InventoryController::class, 'update']);
+Route::post('/inventory/store', [InventoryController::class, 'store']);
+
+Route::resource('inventory', InventoryController::class);
+
+Route::get('/inventory', [InventoryController::class, 'index']);
