@@ -8,7 +8,7 @@
             <h2 class="fw-bold text-primary mb-1">Product Inventory</h2>
             <p class="text-muted">Manage your product inventory and stock levels</p>
         </div>
-        <button class="btn btn-primary px-4 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addProductModal">
+        <button class="btn btn-secondary px-4 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#addProductModal">
             <i class="fas fa-plus me-2"></i> Add New Product
         </button>
     </div>

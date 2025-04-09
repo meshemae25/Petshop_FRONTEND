@@ -570,7 +570,6 @@
                     sidebar.classList.remove('show');
                 }
             });
-            
         });
     </script>
 </body>

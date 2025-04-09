@@ -73,3 +73,5 @@ Route::prefix('admin')->group(function () {
 
 // Logout
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+Route::post('/promocodes', [PromoCodeController::class, 'store'])->name('promocodes.store');

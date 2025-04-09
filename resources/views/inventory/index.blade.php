@@ -19,7 +19,7 @@ extends('layouts.inventory')
             <div class="row g-3">
                 <div class="col-md-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search products...">
+                        <input type="text" class="form-control" placeholder="Search products..."id="searchProducts">
                         <button class="btn btn-outline-secondary" type="button">
                             <i class="fas fa-search"></i>
                         </button>
@@ -863,6 +863,22 @@ extends('layouts.inventory')
                 productId == 1 ? 'Premium Dog Food' : 'Product ' + productId;
             document.getElementById('currentStock').textContent = 
                 productId == 1 ? '1000 units' : '100 units';
+        });
+
+        // Search functionality
+    document.getElementById('searchProducts').addEventListener('keyup', function() {
+        const searchText = this.value.toLowerCase();
+        const tableRows = document.querySelectorAll('tbody tr');
+        
+        tableRows.forEach(row => {
+            const productText = row.querySelector('td:first-child').textContent.toLowerCase();
+            const descText = row.querySelector('td:first-child .small').textContent.toLowerCase();
+            
+            if (promoText.includes(searchText) || descText.includes(searchText)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
         });
     });
 </script>
