@@ -1,4 +1,4 @@
-extends('layouts.inventory')
+@extends('layouts.inventory')
 
 @section('content')
 <div class="container-fluid px-4">
@@ -866,7 +866,7 @@ extends('layouts.inventory')
         });
 
         // Search functionality
-    document.getElementById('searchProducts').addEventListener('keyup', function() {
+    document.getElementById('searchroducts').addEventListener('keyup', function() {
         const searchText = this.value.toLowerCase();
         const tableRows = document.querySelectorAll('tbody tr');
         

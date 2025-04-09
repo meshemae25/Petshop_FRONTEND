@@ -53,22 +53,22 @@ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
 // Categories
 Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category');
 
-// Orders
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-Route::patch('/orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
-Route::post('/orders/send-notification', [OrderController::class, 'sendNotification'])->name('orders.send-notification');
-Route::post('/orders/refund', [OrderController::class, 'refund'])->name('orders.refund');
-
-// Inventory
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
-Route::resource('inventory', InventoryController::class);
-
 // Admin
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/promocodes', [PromoCodeController::class, 'index'])->name('promocodes.index');
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+
+    // Orders
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::patch('/orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
+    Route::post('/orders/send-notification', [OrderController::class, 'sendNotification'])->name('orders.send-notification');
+    Route::post('/orders/refund', [OrderController::class, 'refund'])->name('orders.refund');
+
+    // Inventory
+    Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
+    Route::resource('inventory', InventoryController::class);
 });
 
 // Logout
