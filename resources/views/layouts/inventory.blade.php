@@ -45,7 +45,7 @@
 
         .main-content {
             flex: 1;
-            margin-left: 125px;
+            margin-left: 230px;
             transition: var(--transition);
             padding: 20px;
         }
@@ -317,7 +317,7 @@
                     <span class="sidebar-text">Orders</span>
                 </a>
                 
-                <a href="{{ route('inventory.index') }}" class="sidebar-item {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
+                <a href="{{ route('inventory.index') }}" class="sidebar-item {{ request()->routeIs('inventory.index*') ? 'active' : '' }}">
                     <i class="fas fa-box-open"></i>
                     <span class="sidebar-text">Inventory</span>
                 </a>

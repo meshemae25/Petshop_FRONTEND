@@ -8,153 +8,68 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PromoCodeController;
+use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Static Pages
+Route::view('/', 'welcome');
+Route::view('/home', 'home')->name('home');
+Route::view('/about', 'about')->name('about');
+Route::view('/contact', 'contact')->name('contact');
+Route::view('/faq', 'faq')->name('faq');
+Route::view('/terms', 'terms')->name('terms');
+Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/account', 'account')->name('account');
+Route::view('/navbar', 'navbar')->name('navbar');
+Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-Route::get('/home', function () {
-    return view('home'); 
-})->name('home');
+// Shop Pages
+Route::get('/shop', [ProductController::class, 'index'])->name('shop');
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product-detail');
+Route::get('/search', [ProductController::class, 'search'])->name('search');
 
-Route::get('/about', function () {
-    return view('about'); 
-})->name('about');
+// Favorites / Wishlist
+Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites');
+Route::get('/favorites/search', [ProductController::class, 'searchFavorites'])->name('favorites.search');
+Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
-Route::get('/contact', function () {
-    return view('contact'); 
-})->name('contact');
-
-Route::get('/shop', function () {
-    return view('shop'); 
-})->name('shop');
-
-Route::get('/search', function () {
-    return view('search'); 
-})->name('search');
-
-
-// cart
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
-
+// Cart
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 
-//account
-Route::get('/account', function () {
-    return view('account');
-})->name('account');
-
-//loyalty
-Route::get('/loyalty', function () {
-    return view('loyalty');
-})->name('loyalty');
-
+// Loyalty
 Route::get('/loyalty', [LoyaltyController::class, 'index'])->name('loyalty');
 
-//wishlist
-Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
-
-//newsletter
+// Newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
-//faq
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
-
-//categories
+// Categories
 Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category');
 
-//terms
-Route::get('/terms', function () {
-    return view('terms');
-})->name('terms');
-
-//privacy
-Route::get('/privacy', function () {
-    return view('privacy');
-})->name('privacy');
-
-//search
-Route::get('/search', [ProductController::class, 'search'])->name('search');
-
-//products
-Route::get('/products', [ProductController::class, 'index']);
-
-
-Route::get('/', [ProductController::class, 'index'])->name('shop');
-Route::get('/favorites', [ProductController::class, 'favorites'])->name('favorites');
-Route::get('/search', [ProductController::class, 'search'])->name('search');
-
-//favorites
-Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites');
-
-Route::controller(FavoritesController::class)->group(function () {
-    Route::get('/favorites', 'index');
-});
-
-Route::get('/favorites', [FavoritesController::class, 'index'])->name('favorites');
-
-//
-Route::get('/', [ProductController::class, 'index'])->name('shop');
-Route::get('/favorites', [ProductController::class, 'favorites'])->name('favorites');
-Route::get('/favorites/search', [ProductController::class, 'searchFavorites'])->name('favorites.search');
-Route::get('/search', [ProductController::class, 'search'])->name('search');
-
-//product-detail
-Route::get('/product-detail', function () {
-    return view('product-detail');
-})->name('product-detail');
-
-Route::get('/product-detail/{id}', [ProductController::class, 'show'])->name('product-detail');
-
-Route::get('/navbar', function () {
-    return view('navbar');
-})->name('navbar');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-});
-
-Route::prefix('admin')->group(function () {
-    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-});
-
+// Orders
 Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
-
-Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
-
-Route::get('/promocodes', [PromoCodeController::class, 'index'])->name('promocodes.index');
-
-Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
-
-Route::get('/orders', [OrderController::class, 'index']);
-
-Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-
 Route::patch('/orders/update-status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
-
 Route::post('/orders/send-notification', [OrderController::class, 'sendNotification'])->name('orders.send-notification');
-
 Route::post('/orders/refund', [OrderController::class, 'refund'])->name('orders.refund');
 
-Route::get('/inventory', [InventoryController::class, 'index']);
-Route::post('/inventory/update', [InventoryController::class, 'update']);
-Route::post('/inventory/store', [InventoryController::class, 'store']);
-
+// Inventory
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
 Route::resource('inventory', InventoryController::class);
 
-Route::get('/inventory', [InventoryController::class, 'index']);
+// Admin
+Route::prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/promocodes', [PromoCodeController::class, 'index'])->name('promocodes.index');
+    Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+});
+
+// Logout
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
