@@ -67,7 +67,6 @@ Route::prefix('admin')->group(function () {
     Route::post('/orders/refund', [OrderController::class, 'refund'])->name('orders.refund');
 
     // Inventory
-    Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
     Route::resource('inventory', InventoryController::class);
 });
 
