@@ -1,10 +1,12 @@
+<!-- resources/views/layouts/promocode.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promo Code</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Promo Code - PawShop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -66,7 +68,7 @@
             font-size: 1.25rem;
         }
 
-        .sidebar-brand img {
+        .sidebar-brand i {
             margin-right: 10px;
         }
 
@@ -96,7 +98,6 @@
             text-align: center;
         }
 
-        /* Order Dashboard Specific Styles */
         .page-header {
             display: flex;
             justify-content: space-between;
@@ -217,7 +218,6 @@
             border-color: var(--primary-color);
         }
 
-        /* Modal Styles */
         .modal-content {
             border-radius: var(--border-radius);
             border: none;
@@ -261,7 +261,6 @@
             margin-right: 10px;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 992px) {
             .sidebar {
                 width: 70px;
@@ -295,7 +294,8 @@
             }
         }
     </style>
-    <body>
+</head>
+<body>
     <div class="admin-container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -305,38 +305,31 @@
                     <span class="sidebar-text">PawShop</span>
                 </a>
             </div>
-            
             <div class="sidebar-menu">
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <i class="fas fa-chart-line"></i>
                     <span class="sidebar-text">Dashboard</span>
                 </a>
-                
-                <a href="{{ route('orders.index') }}" class="sidebar-item {{ request()->routeIs('order.index') ? 'active' : '' }}">
+                <a href="{{ route('orders.index') }}" class="sidebar-item {{ request()->routeIs('orders.index') ? 'active' : '' }}">
                     <i class="fas fa-shopping-bag"></i>
                     <span class="sidebar-text">Orders</span>
                 </a>
-                
                 <a href="{{ route('inventory.index') }}" class="sidebar-item {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
                     <i class="fas fa-box-open"></i>
                     <span class="sidebar-text">Inventory</span>
                 </a>
-                
                 <a href="{{ route('analytics.index') }}" class="sidebar-item {{ request()->routeIs('analytics.*') ? 'active' : '' }}">
                     <i class="fas fa-chart-bar"></i>
                     <span class="sidebar-text">Sales Analytics</span>
                 </a>
-                
                 <a href="{{ route('promocodes.index') }}" class="sidebar-item {{ request()->routeIs('promocodes.*') ? 'active' : '' }}">
                     <i class="fas fa-tag"></i>
                     <span class="sidebar-text">Promo Codes</span>
                 </a>
-                
                 <a href="{{ route('logout') }}" class="sidebar-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="sidebar-text">Logout</span>
                 </a>
-                
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
@@ -349,6 +342,16 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Set up CSRF token for all AJAX requests
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @yield('scripts')
 </body>
 </html>
