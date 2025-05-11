@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\PromoCode;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 class PromoCodeController extends Controller
@@ -12,55 +11,52 @@ class PromoCodeController extends Controller
     public function index()
     {
         $promoCodes = PromoCode::paginate(10);
-        return view('promocodes.index', compact('promoCodes'));
+        return response()->view('promocodes.index', compact('promoCodes'))
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate');
     }
 
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|string|unique:promo_codes,code|max:255',
-            'description' => 'nullable|string|max:255',
+        $validated = $request->validate([
+            'code' => 'required|unique:promo_codes,code',
             'discount_type' => 'required|in:percentage,fixed',
-            'discount_value' => 'required|numeric|min:0',
-            'start_date' => 'nullable|date',
+            'discount_value' => 'required|numeric|min:1',
             'expiration_date' => 'required|date|after_or_equal:today',
-            'usage_limit' => 'nullable|integer|min:1',
-            'min_purchase' => 'nullable|numeric|min:0',
-            'is_active' => 'nullable|boolean',
+            // Add other validation rules as needed
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-            ], 422);
+        $promo = \App\Models\PromoCode::create([
+            'code' => $validated['code'],
+            'description' => $request->input('description'),
+            'discount_type' => $validated['discount_type'],
+            'discount_value' => $validated['discount_value'],
+            'start_date' => $request->input('start_date'),
+            'expiration_date' => $validated['expiration_date'],
+            'usage_limit' => $request->input('usage_limit'),
+            'min_purchase' => $request->input('min_purchase'),
+            'is_active' => $request->has('is_active'),
+        ]);
+
+        // Calculate status for the new promo code
+        $status = 'Active';
+        $now = now();
+        if ($promo->expiration_date < $now) {
+            $status = 'Expired';
+        } elseif ($promo->start_date && $promo->start_date > $now) {
+            $status = 'Scheduled';
         }
 
-        $status = $this->determineStatus(
-            $request->boolean('is_active', true),
-            $request->start_date,
-            $request->expiration_date
-        );
-
-        $promoCode = PromoCode::create([
-            'code' => $request->code,
-            'description' => $request->description,
-            'discount_type' => $request->discount_type,
-            'discount_value' => $request->discount_value,
-            'start_date' => $request->start_date,
-            'expiration_date' => $request->expiration_date,
-            'usage_limit' => $request->usage_limit,
-            'min_purchase' => $request->min_purchase,
-            'is_active' => $request->boolean('is_active', true),
-            'status' => $status,
-            'usage_count' => 0,
-        ]);
-
+        // Return JSON for AJAX
         return response()->json([
-            'success' => true,
-            'message' => 'Promo code created successfully.',
-            'promo' => $promoCode->toArray(),
-        ], 200);
+            'id' => $promo->id,
+            'code' => $promo->code,
+            'description' => $promo->description,
+            'discount_type' => $promo->discount_type,
+            'discount_value' => $promo->discount_value,
+            'usage_limit' => $promo->usage_limit,
+            'expiration_date_formatted' => \Carbon\Carbon::parse($promo->expiration_date)->format('d-m-Y'),
+            'status' => $status,
+        ]);
     }
 
     public function edit(PromoCode $promocode)
@@ -70,89 +66,61 @@ class PromoCodeController extends Controller
 
     public function update(Request $request, PromoCode $promocode)
     {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|string|unique:promo_codes,code,' . $promocode->id . '|max:255',
+        $validated = $request->validate([
+            'code' => 'required|string|unique:promocodes,code,' . $promocode->id . '|max:255',
             'description' => 'nullable|string|max:255',
             'discount_type' => 'required|in:percentage,fixed',
-            'discount_value' => 'required|numeric|min:0',
-            'start_date' => 'nullable|date',
+            'discount_value' => 'required|numeric|min:1' . ($request->discount_type === 'percentage' ? '|max:100' : ''),
+            'start_date' => 'nullable|date|after_or_equal:today',
             'expiration_date' => 'required|date|after_or_equal:today',
             'usage_limit' => 'nullable|integer|min:1',
             'min_purchase' => 'nullable|numeric|min:0',
             'is_active' => 'nullable|boolean',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-            ], 422);
+        try {
+            $status = $this->determineStatus(
+                $request->boolean('is_active', true),
+                $request->start_date,
+                $request->expiration_date
+            );
+
+            $promocode->update([
+                'code' => $validated['code'],
+                'description' => $validated['description'],
+                'discount_type' => $validated['discount_type'],
+                'discount_value' => $validated['discount_value'],
+                'start_date' => $validated['start_date'] ? Carbon::parse($validated['start_date']) : null,
+                'expiration_date' => Carbon::parse($validated['expiration_date']),
+                'usage_limit' => $validated['usage_limit'],
+                'min_purchase' => $validated['min_purchase'],
+                'is_active' => $request->boolean('is_active', true),
+                'status' => $status,
+            ]);
+
+            return redirect()->route('promocodes.index')
+                ->with('success', 'Promo code updated successfully.');
+        } catch (\Exception $e) {
+            \Log::error('Error updating promo code: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'An error occurred while updating the promo code. Please try again.')
+                ->withInput();
         }
-
-        $status = $this->determineStatus(
-            $request->boolean('is_active', true),
-            $request->start_date,
-            $request->expiration_date
-        );
-
-        $promocode->update([
-            'code' => $request->code,
-            'description' => $request->description,
-            'discount_type' => $request->discount_type,
-            'discount_value' => $request->discount_value,
-            'start_date' => $request->start_date,
-            'expiration_date' => $request->expiration_date,
-            'usage_limit' => $request->usage_limit,
-            'min_purchase' => $request->min_purchase,
-            'is_active' => $request->boolean('is_active', true),
-            'status' => $status,
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Promo code updated successfully.',
-            'promo' => $promocode->toArray(),
-        ], 200);
     }
 
     public function destroy(PromoCode $promocode)
     {
-        $promocode->delete();
-        return response()->json([
-            'success' => true,
-            'message' => 'Promo code deleted successfully.',
-        ], 200);
+        try {
+            $promocode->delete();
+            return redirect()->route('promocodes.index')
+                ->with('success', 'Promo code deleted successfully.');
+        } catch (\Exception $e) {
+            \Log::error('Error deleting promo code: ' . $e->getMessage());
+            return redirect()->route('promocodes.index')
+                ->with('error', 'An error occurred while deleting the promo code. Please try again.');
+        }
     }
 
-    public function toggleActive(Request $request, $id)
-    {
-        $promo = PromoCode::findOrFail($id);
-        $isActive = $request->boolean('is_active');
-        $promo->is_active = $isActive;
-        $promo->status = $this->determineStatus(
-            $isActive,
-            $promo->start_date,
-            $promo->expiration_date
-        );
-        $promo->save();
-
-        \Log::info('Promo Code Updated:', $promo->toArray());
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Promo code status updated successfully.',
-            'promo' => $promo->toArray(),
-        ], 200);
-    }
-
-    /**
-     * Determine the status of a promo code based on is_active, start_date, and expiration_date.
-     *
-     * @param bool $isActive
-     * @param string|null $startDate
-     * @param string $expirationDate
-     * @return string
-     */
     private function determineStatus($isActive, $startDate, $expirationDate)
     {
         $now = Carbon::now();
