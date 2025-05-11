@@ -10,7 +10,9 @@ class Inventory extends Model
     /** @use HasFactory<\Database\Factories\InventoryFactory> */
     use HasFactory;
 
-     protected $fillable = [
+    protected $table = 'inventories'; // Explicitly set the table name
+
+    protected $fillable = [
         'category_id',
         'name',
         'description',
@@ -22,4 +24,9 @@ class Inventory extends Model
         'image',
         'status',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
